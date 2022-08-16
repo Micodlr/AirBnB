@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       Spot.hasMany(models.Review, { foreignKey: "spotId" });
-      Spot.hasMany(modesl.Image, {
+      Spot.hasMany(models.Image, {
         foreignKey: "imageableId",
         constraints: false,
         scope: {
