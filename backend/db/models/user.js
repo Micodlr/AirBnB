@@ -75,6 +75,7 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           len: [3, 256],
           isEmail: true,
@@ -110,7 +111,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ["password"] },
+          attributes: {
+            exclude: ["password", "createdAt", "updatedAt"],
+          },
         },
         loginUser: {
           attributes: {},

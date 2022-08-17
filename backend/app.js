@@ -43,6 +43,7 @@ app.use(
 
 app.use(routes); // Connect all the routes
 
+//error handlers
 app.use((_req, _res, next) => {
   const err = new Error("The requested resource couldn't be found.");
   err.title = "Resource Not Found";
@@ -56,6 +57,7 @@ app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
   if (err instanceof ValidationError) {
     err.errors = err.errors.map((e) => e.message);
+    err.status = 403;
     err.title = "Validation error";
   }
   next(err);

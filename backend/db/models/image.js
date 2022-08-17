@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Image",
     }
   );
-  //eager loading
+  // eager loading
   // Image.addHook("afterFind", (findResult) => {
   //   if (!Array.isArray(findResult)) findResult = [findResult];
   //   for (const instance of findResult) {
