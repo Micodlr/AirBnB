@@ -13,6 +13,8 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+//POST Add an Image to a Spot based on the Spot's id
+
 // POST /Signup
 const validateSignup = [
   check("firstName")
@@ -69,7 +71,7 @@ router.post("/signup", validateSignup, async (req, res, next) => {
   return res.json(user);
 });
 
-//GET /user/spots get current user spots
+//GET /user/spots Get all Spots owned by the Current User
 router.get(
   "/user/spots",
   [restoreUser, requireAuth],
@@ -80,19 +82,16 @@ router.get(
       where: { ownerId: userId },
       attributes: {
         include: [
-          [sequelize.fn("COUNT", sequelize.col("Reviews.stars")), "NumReviews"],
-          [
-            sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-            "AvgStarRating",
-          ],
+          [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
         ],
       },
+      group: "Spot.id",
       include: {
         model: Review,
         attributes: [],
       },
     });
-    res.json(userSpots);
+    res.json({ Spots: userSpots });
   }
 );
 
@@ -101,9 +100,7 @@ router.get(
 router.get("/user", restoreUser, (req, res) => {
   const { user } = req;
   if (user) {
-    return res.json({
-      user: user.toSafeObject(),
-    });
+    return res.json(user.dataValues);
   } else return res.json({});
 });
 

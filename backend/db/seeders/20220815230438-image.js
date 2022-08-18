@@ -22,6 +22,24 @@ module.exports = {
     //   ],
     //   {}
     // );
+    queryInterface.bulkInsert(
+      "Images",
+      [
+        {
+          userId: 2,
+          imageableType: "spotImage",
+          imageableId: 1,
+          url: "https://disneyland.disney.go.com/destinations/disneyland/",
+        },
+        {
+          userId: 2,
+          imageableType: "reviewImage",
+          imageableId: 2,
+          url: "https://www.nbclosangeles.com/the-scene/encanto-magic-blooms-at-disneyland-park/2863453/",
+        },
+      ],
+      {}
+    );
   },
 
   async down(queryInterface, Sequelize) {
@@ -31,5 +49,12 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete(
+      "Images",
+      {
+        imageableId: [1, 2],
+      },
+      {}
+    );
   },
 };

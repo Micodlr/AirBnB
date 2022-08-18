@@ -26,6 +26,18 @@ module.exports = {
           description: "Place where web developers are created",
           price: 123,
         },
+        {
+          ownerId: 1,
+          address: "133 Hazelnut Hill",
+          city: "Groton",
+          state: "Connecticut",
+          country: "United States of America",
+          lat: 37.7645358,
+          lng: -122.4730327,
+          name: "Fight Club",
+          description: "Place where tough people get tougher",
+          price: 431,
+        },
       ],
       {}
     );
@@ -42,7 +54,7 @@ module.exports = {
     await queryInterface.bulkDelete(
       "Spots",
       {
-        address: { [Op.in]: ["123 Disney Lane"] },
+        address: { [Op.in]: ["123 Disney Lane", "133 Hazelnut Hill"] },
       },
       {}
     );
