@@ -5,7 +5,8 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Spot, Review } = require("../../db/models");
+const sequelize = require("sequelize");
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -35,8 +36,25 @@ const validateSignup = [
   check("username").not().isEmail().withMessage("Username cannot be an email."),
   handleValidationErrors,
 ];
-router.post("/signup", [requireAuth, validateSignup], async (req, res) => {
+router.post("/signup", validateSignup, async (req, res, next) => {
   const { firstName, lastName, email, password, username } = req.body;
+  const emailCheck = await User.findOne({ where: { email: email } });
+  if (emailCheck) {
+    const err = new Error("User already exists");
+
+    err.status = 403;
+    err.errors = { email: "User with that email already exists" };
+    next(err);
+  }
+
+  const userNameCheck = await User.findOne({ where: { username: username } });
+  if (userNameCheck) {
+    const err = new Error("User already exists");
+
+    err.status = 403;
+    err.errors = { username: "User with that username already exists" };
+    next(err);
+  }
   const user = await User.signup({
     firstName,
     lastName,
@@ -50,6 +68,33 @@ router.post("/signup", [requireAuth, validateSignup], async (req, res) => {
   user.dataValues.token = await setTokenCookie(res, user);
   return res.json(user);
 });
+
+//GET /user/spots get current user spots
+router.get(
+  "/user/spots",
+  [restoreUser, requireAuth],
+  async (req, res, next) => {
+    console.log("hello");
+    const userId = req.user.id;
+    const userSpots = await Spot.findAll({
+      where: { ownerId: userId },
+      attributes: {
+        include: [
+          [sequelize.fn("COUNT", sequelize.col("Reviews.stars")), "NumReviews"],
+          [
+            sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+            "AvgStarRating",
+          ],
+        ],
+      },
+      include: {
+        model: Review,
+        attributes: [],
+      },
+    });
+    res.json(userSpots);
+  }
+);
 
 //GET /user get current user
 
@@ -67,10 +112,10 @@ const validateLogin = [
   check("credential")
     .exists({ checkFalsy: true })
     .notEmpty()
-    .withMessage("Please provide a valid email or username."),
+    .withMessage("Email or username is required."),
   check("password")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a password."),
+    .withMessage("Password is required"),
   handleValidationErrors,
 ];
 router.post("/login", validateLogin, async (req, res, next) => {
@@ -79,10 +124,10 @@ router.post("/login", validateLogin, async (req, res, next) => {
   const user = await User.login({ credential, password });
 
   if (!user) {
-    const err = new Error("Login failed");
+    const err = new Error("Invalid credentials");
     err.status = 401;
     err.title = "Login failed";
-    err.errors = ["The provided credentials were invalid."];
+    // err.errors = ["The provided credentials were invalid."];
     return next(err);
   }
 
