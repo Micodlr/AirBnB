@@ -13,8 +13,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
-//POST Add an Image to a Spot based on the Spot's id
-
 // POST /Signup
 const validateSignup = [
   check("firstName")
@@ -46,7 +44,7 @@ router.post("/signup", validateSignup, async (req, res, next) => {
 
     err.status = 403;
     err.errors = { email: "User with that email already exists" };
-    next(err);
+    return next(err);
   }
 
   const userNameCheck = await User.findOne({ where: { username: username } });
@@ -55,7 +53,7 @@ router.post("/signup", validateSignup, async (req, res, next) => {
 
     err.status = 403;
     err.errors = { username: "User with that username already exists" };
-    next(err);
+    return next(err);
   }
   const user = await User.signup({
     firstName,

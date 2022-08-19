@@ -36,6 +36,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Image",
+      defaultScope: {
+        attributes: {
+          exclude: ["userId", "imageableType", "updatedAt", "createdAt"],
+        },
+      },
     }
   );
   // eager loading
