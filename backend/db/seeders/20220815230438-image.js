@@ -26,10 +26,16 @@ module.exports = {
       "Images",
       [
         {
-          userId: 2,
+          userId: 1,
           imageableType: "spotImage",
           imageableId: 1,
           url: "https://disneyland.disney.go.com/destinations/disneyland/",
+        },
+        {
+          userId: 1,
+          imageableType: "spotImage",
+          imageableId: 1,
+          url: "https://disneyland.disney.go.com/destinations/disneyland/2323232323",
         },
         {
           userId: 2,
