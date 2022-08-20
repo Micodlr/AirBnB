@@ -51,7 +51,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
   if (!spotCheck) {
     const err = new Error("Spot couldn't be found");
     err.status = 404;
-    next(err);
+    return next(err);
   }
   const review = await Review.findAll({
     where: { spotId },
