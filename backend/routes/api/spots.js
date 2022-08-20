@@ -49,7 +49,7 @@ router.post(
   [restoreUser, requireAuth],
   async (req, res, next) => {
     const userId = req.user.id;
-    const { url } = req.body;
+    // const { url } = req.body;
     const { spotId } = req.params;
     const spot = await Spot.findByPk(spotId);
     if (!spot) {
@@ -57,15 +57,18 @@ router.post(
       err.status = 404;
       return next(err);
     }
-    if (userId !== spot.ownerId) {
-      const err = new Error("Forbidden");
-      err.status = 403;
-      return next(err);
-    }
-    const image = await spot.createImage({ userId, url });
-    const result = await Image.findByPk(image.id);
+    // if (userId !== spot.ownerId) {
+    //   const err = new Error("Forbidden");
+    //   err.status = 403;
+    //   return next(err);
+    // }
+    const image = await spot.createImage({ userId, url: req.body.url });
+    // const result = await Image.findByPk(image.id);
+    // res.json(result);
 
-    res.json(result);
+    console.log(image);
+    const { id, imageableId, url } = image;
+    res.json({ id, imageableId, url });
   }
 );
 
