@@ -57,11 +57,11 @@ router.post(
       err.status = 404;
       return next(err);
     }
-    // if (userId !== spot.ownerId) {
-    //   const err = new Error("Forbidden");
-    //   err.status = 403;
-    //   return next(err);
-    // }
+    if (userId !== spot.ownerId) {
+      const err = new Error("Forbidden");
+      err.status = 403;
+      return next(err);
+    }
     const image = await spot.createImage({ userId, url: req.body.url });
     // const result = await Image.findByPk(image.id);
     // res.json(result);
