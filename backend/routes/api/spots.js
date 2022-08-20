@@ -43,6 +43,24 @@ const validateSpot = [
     .withMessage("Price per day is required"),
   handleValidationErrors,
 ];
+
+//GET Get all Reviews by a Spot's id
+router.get("/:spotId/reviews", async (req, res, next) => {
+  const { spotId } = req.params;
+  const spotCheck = await Spot.findByPk(spotId);
+  if (!spotCheck) {
+    const err = new Error("Spot couldn't be found");
+    err.status = 404;
+    next(err);
+  }
+  const review = await Review.findAll({
+    where: { spotId },
+    include: { model: Image },
+  });
+
+  res.json({ Reviews: review });
+});
+
 //POST Add an Image to a Spot based on the Spot's id
 router.post(
   "/:spotId/images",
@@ -192,6 +210,7 @@ router.get("/:spotId", async (req, res, next) => {
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "AvgStarRating"],
       ],
     },
+    group: "Images.id",
     include: [
       { model: Review, attributes: [] },
       { model: Image, attributes: ["id", "imageableId", "url"] },
