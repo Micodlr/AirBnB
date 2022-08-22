@@ -5,13 +5,32 @@ const {
   restoreUser,
   requireAuth,
 } = require("../../utils/auth");
-const { User, Spot, Review, Image } = require("../../db/models");
+const { User, Spot, Review, Image, Booking } = require("../../db/models");
 const sequelize = require("sequelize");
 
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
+
+//GET Get all of the Current User's Bookings
+router.get(
+  "/user/bookings",
+  [restoreUser, requireAuth],
+  async (req, res, next) => {
+    const userId = req.user.id;
+    const bookings = await Booking.findAll({
+      where: { userId: userId },
+      include: [
+        {
+          model: Spot,
+          attributes: { exclude: ["description", "createdAt", "updatedAt"] },
+        },
+      ],
+    });
+    res.json({ Bookings: bookings });
+  }
+);
 
 //GET Get all Reviews of the Current User
 router.get("/user/reviews", restoreUser, async (req, res, next) => {
