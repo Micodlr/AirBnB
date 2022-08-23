@@ -352,7 +352,6 @@ router.get("/:spotId", async (req, res, next) => {
   const spotCheck = await Spot.findByPk(spotId);
   if (!spotCheck) {
     const err = new Error("Spot couldn't be found");
-    console.log("hello");
     err.status = 404;
     // err.errors = { email: "User with that email already exists" };
     return next(err);
@@ -369,7 +368,7 @@ router.get("/:spotId", async (req, res, next) => {
     include: [
       { model: Review, attributes: [] },
       { model: Image, attributes: ["id", "imageableId", "url"] },
-      { model: User, attributes: ["id", "firstName", "lastName"] },
+      { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] },
     ],
   });
 
