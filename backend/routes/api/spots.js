@@ -8,7 +8,7 @@ const {
 const { Spot, User, Review, Image, Booking } = require("../../db/models");
 const sequelize = require("sequelize");
 
-const { check } = require("express-validator");
+const { check, query } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
@@ -285,18 +285,69 @@ router.put(
 );
 
 //GET all spots /spots
-router.get("/", async (req, res, next) => {
+const validateQueryFilters = [
+  query("page")
+    .optional()
+    .isInt({ min: 0, max: 10 })
+    .withMessage("Page size must be greater than or equal to 0"),
+  query("size")
+    .optional()
+    .isInt({ min: 0, max: 20 })
+    .withMessage("Size must be greater than or equal to 0"),
+  query("maxLat")
+    .optional()
+    .exists({ checkFalsy: true })
+    .isDecimal()
+    .withMessage("Maximum latitude is invalid"),
+  query("minLat")
+    .optional()
+    .exists({ checkFalsy: true })
+    .isDecimal()
+    .withMessage("Minimum latitude is invalid"),
+  query("minLng")
+    .optional()
+    .exists({ checkFalsy: true })
+    .isDecimal()
+    .withMessage("Minimum longitude is invalid"),
+  query("maxLng")
+    .optional()
+    .exists({ checkFalsy: true })
+    .isDecimal()
+    .withMessage("Maximum longitude is invalid"),
+  query("minPrice")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("Minimum price must be greater than or equal to 0"),
+  query("maxPrice")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("Maximum price must be greater than or equal to 0"),
+
+  handleValidationErrors,
+];
+
+router.get("/", [validateQueryFilters], async (req, res, next) => {
   //   const spots = await Spot.findAll();
+  let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } =
+    req.query;
+  console.log(page, size);
+  const limit = size || 20;
+  const offset = limit * ((page || 0) - 1);
+
   const spots = await Spot.findAll({
     attributes: {
       include: [
         [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
       ],
     },
+
     group: "Spot.id",
     include: [{ model: Review, attributes: [] }],
+    limit,
+    offset,
+    subQuery: false,
   });
-  res.json({ Spots: spots });
+  res.json({ Spots: spots, page: offset + 1, size: limit });
 });
 
 //POST /spots Create a Spot
