@@ -39,7 +39,6 @@ router.put(
     const user = req.user;
     const bookingId = req.params.bookingId;
     const booking = await Booking.findByPk(bookingId);
-    console.log(booking);
 
     //check booking
     if (!booking) {
