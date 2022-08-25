@@ -444,12 +444,12 @@ router.get("/:spotId", async (req, res, next) => {
         ],
       ],
     },
-    group: ["Owner.Id", "Spot.id", "Images.id"],
     include: [
       { model: Review, attributes: [] },
       { model: Image, attributes: ["id", "imageableId", "url"] },
       { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] },
     ],
+    group: ["Owner.Id", "Spot.id", "Images.id"],
   });
 
   res.json(spot);
