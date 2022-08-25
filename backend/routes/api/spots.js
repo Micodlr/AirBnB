@@ -351,7 +351,14 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
   const spots = await Spot.findAll({
     attributes: {
       include: [
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+        [
+          sequelize.fn(
+            "ROUND",
+            sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+            1
+          ),
+          "avgRating",
+        ],
       ],
     },
 
@@ -427,7 +434,14 @@ router.get("/:spotId", async (req, res, next) => {
     attributes: {
       include: [
         [sequelize.fn("COUNT", sequelize.col("Reviews.stars")), "NumReviews"],
-        [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "AvgStarRating"],
+        [
+          sequelize.fn(
+            "ROUND",
+            sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+            1
+          ),
+          "AvgStarRating",
+        ],
       ],
     },
     group: "Images.id",

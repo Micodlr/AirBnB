@@ -114,7 +114,14 @@ router.get(
       where: { ownerId: userId },
       attributes: {
         include: [
-          [sequelize.fn("AVG", sequelize.col("Reviews.stars")), "avgRating"],
+          [
+            sequelize.fn(
+              "ROUND",
+              sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+              1
+            ),
+            "avgRating",
+          ],
         ],
       },
       group: "Spot.id",
