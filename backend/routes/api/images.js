@@ -19,7 +19,7 @@ router.delete(
     const imageId = req.params.imageId;
     const userId = req.user.id;
     const image = await Image.findByPk(imageId);
-    console.log(image, userId);
+
     if (!image) {
       const err = new Error("Image couldn't be found");
       err.status = 404;

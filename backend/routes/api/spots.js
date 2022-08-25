@@ -39,7 +39,7 @@ const validateSpot = [
     .withMessage("Description is required"),
   check("price")
     .exists({ checkFalsy: true })
-    .isNumeric({ checkFalsy: true })
+    .isInt({ checkFalsy: true })
     .withMessage("Price per day is required"),
   handleValidationErrors,
 ];
@@ -48,8 +48,8 @@ const validateSpot = [
 const validateBooking = [
   // check("startDate")
   //   .exists({ checkFalsy: true })
-  //   .isAfter()
-  //   .withMessage("Street address is required"),
+  //   .isAfter(`${new Date()}`)
+  //   .withMessage("StartDate cannot be on or before todays date"),
   check("endDate").custom((endDate, { req }) => {
     if (req.body.startDate >= endDate) {
       throw new Error("EndDate cannot be on or before startDate");
@@ -179,7 +179,8 @@ router.post(
       err.status = 404;
       return next(err);
     }
-    const reviewCheck = await Review.findOne({ where: { userId } });
+    const reviewCheck = await Review.findOne({ where: { spotId, userId } });
+
     if (reviewCheck) {
       const err = new Error("User already has a review for this spot");
       err.status = 403;
@@ -209,7 +210,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     where: { spotId },
     include: [
       { model: User, attributes: ["id", "firstName", "lastName"] },
-      { model: Image },
+      { model: Image, attributes: ["id", "imageableId", "url"] },
     ],
   });
 
@@ -262,7 +263,15 @@ router.put(
       description,
       price,
     } = req.body;
-    const spot = await Spot.findByPk(spotId);
+    const spot = await Spot.findByPk(spotId, {
+      attributes: { exclude: ["previewImage"] },
+    });
+
+    if (!spot) {
+      const err = new Error("Spot couldn't be found");
+      err.status = 404;
+      return next(err);
+    }
 
     if (req.user.id !== spot.ownerId) {
       const err = new Error("Forbidden");
@@ -330,9 +339,11 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
   //   const spots = await Spot.findAll();
   let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } =
     req.query;
-  console.log(page, size);
+
   const limit = size || 20;
-  const offset = limit * ((page || 0) - 1);
+  let offset = limit * ((page || 1) - 1);
+
+  // if (offset === 0) offset = 1;
 
   const spots = await Spot.findAll({
     attributes: {
@@ -347,7 +358,8 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
     offset,
     subQuery: false,
   });
-  res.json({ Spots: spots, page: offset + 1, size: limit });
+
+  res.json({ Spots: spots, page: offset, size: Number(limit) });
 });
 
 //POST /spots Create a Spot
@@ -357,7 +369,7 @@ router.post(
   async (req, res, next) => {
     const { id } = req.user;
     const user = await User.findByPk(id);
-    console.log(user);
+    // console.log(user);
     const {
       address,
       city,

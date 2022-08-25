@@ -34,7 +34,7 @@ router.get(
 
 //GET Get all Reviews of the Current User
 router.get("/user/reviews", restoreUser, async (req, res, next) => {
-  console.log(req.user.id);
+  // console.log(req.user.id);
   const reviews = await Review.findAll({
     where: { userId: req.user.id },
     include: [
@@ -52,14 +52,14 @@ router.get("/user/reviews", restoreUser, async (req, res, next) => {
 const validateSignup = [
   check("firstName")
     .exists({ checkFalsy: true })
-    .withMessage("Please provide a first name"),
+    .withMessage("First Name is required"),
   check("lastName")
     .exists({ checkFalsy: true })
-    .withMessage("Please proved a last name"),
+    .withMessage("Last Name is required"),
   check("email")
     .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage("Please provide a valid email."),
+    .withMessage("Invalid Email"),
   check("password")
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
@@ -67,7 +67,7 @@ const validateSignup = [
   check("username")
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
-    .withMessage("Please provide a username with at least 4 characters."),
+    .withMessage("Username is required"),
   check("username").not().isEmail().withMessage("Username cannot be an email."),
   handleValidationErrors,
 ];
@@ -109,7 +109,6 @@ router.get(
   "/user/spots",
   [restoreUser, requireAuth],
   async (req, res, next) => {
-    console.log("hello");
     const userId = req.user.id;
     const userSpots = await Spot.findAll({
       where: { ownerId: userId },

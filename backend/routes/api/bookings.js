@@ -14,10 +14,10 @@ const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
 const validateBooking = [
-  // check("startDate")
-  //   .exists({ checkFalsy: true })
-  //   .isAfter()
-  //   .withMessage("Street address is required"),
+  //   check("startDate")
+  //     .exists({ checkFalsy: true })
+  //     .isAfter(`${new Date()}`)
+  //     .withMessage("StartDate cannot be on or before todays date"),
   check("endDate").custom((endDate, { req }) => {
     if (req.body.startDate >= endDate) {
       throw new Error("EndDate cannot be on or before startDate");
@@ -39,24 +39,25 @@ router.put(
     const user = req.user;
     const bookingId = req.params.bookingId;
     const booking = await Booking.findByPk(bookingId);
-    const spotId = booking.spotId;
-    //check owner
-    if (req.user.id !== booking.userId) {
-      const err = new Error("Forbidden");
-      err.status = 403;
-      return next(err);
-    }
+    console.log(booking);
+
     //check booking
     if (!booking) {
       const err = new Error("Booking couldn't be found");
       err.status = 404;
       return next(err);
     }
+    //check owner
+    if (user.id !== booking.userId) {
+      const err = new Error("Forbidden");
+      err.status = 403;
+      return next(err);
+    }
     //check endDate
     let todaysDate = new Date();
 
     let endDateToCompare = new Date(endDate);
-    console.log(endDateToCompare);
+    // console.log(endDateToCompare);
     if (endDateToCompare <= todaysDate) {
       const err = new Error("Past bookings can't be modified");
       err.status = 403;
@@ -64,6 +65,7 @@ router.put(
     }
 
     //Check date availability
+    const spotId = booking.spotId;
     const startDateBooked = await Booking.findOne({
       where: { spotId, startDate },
     });
@@ -99,17 +101,17 @@ router.delete(
     const bookingId = req.params.bookingId;
     const userId = req.user.id;
     const booking = await Booking.findByPk(bookingId);
-    const spot = await Spot.findByPk(booking.spotId);
     const todaysDate = new Date();
-    console.log(booking.userId, spot.ownerId);
-    if (booking.userId !== userId && userId !== spot.ownerId) {
-      const err = new Error("Forbidden");
-      err.status = 403;
-      return next(err);
-    }
+    // console.log(booking.userId, spot.ownerId);
     if (!booking) {
       const err = new Error("Booking couldn't be found");
       err.status = 404;
+      return next(err);
+    }
+    const spot = await Spot.findByPk(booking.spotId);
+    if (booking.userId !== userId && userId !== spot.ownerId) {
+      const err = new Error("Forbidden");
+      err.status = 403;
       return next(err);
     }
     const bookingStartDate = new Date(booking.startDate);

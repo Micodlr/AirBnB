@@ -17,6 +17,7 @@ router.post(
   "/:reviewId/images",
   [restoreUser, requireAuth],
   async (req, res, next) => {
+    const userId = req.user.id;
     const reviewId = req.params.reviewId;
     const review = await Review.findByPk(reviewId);
     if (!review) {
@@ -30,22 +31,33 @@ router.post(
       return next(err);
     }
     const images = await review.getImages();
-    const imageCount = await Image.count({
-      where: { imageableId: images[0].imageableId },
-    });
-    if (imageCount >= 10) {
+
+    if (images.length < 10) {
+      const newImage = await review.createImage({
+        userId: userId,
+        url: req.body.url,
+      });
+      const { id, imageableId, url } = newImage;
+
+      return res.json({ id, imageableId, url });
+    } else {
       const err = new Error(
         "Maximum number of images for this resource was reached"
       );
       err.status = 403;
       return next(err);
     }
-    const newImage = await review.createImage({
-      url: req.body.url,
-    });
-    const { id, imageableId, url } = newImage;
+    // const imageCount = await Image.count({
+    //   where: { imageableId: images[0].imageableId },
+    // });
+    // if (imageCount >= 10) {
+    // }
+    // const newImage = await review.createImage({
+    //   url: req.body.url,
+    // });
+    // const { id, imageableId, url } = newImage;
 
-    res.json({ id, imageableId, url });
+    // res.json({ id, imageableId, url });
     // const image = await review.createImage({ url: req.body.url });
     // const { id, imageableId, url } = image;
     // res.json(id, imageableId, url);
@@ -72,14 +84,14 @@ router.put(
     const reviewId = req.params.reviewId;
     const { review, stars } = req.body;
     const reviewToEdit = await Review.findByPk(reviewId);
-    if (userId !== reviewToEdit.userId) {
-      const err = new Error("Forbidden");
-      err.status = 403;
-      return next(err);
-    }
     if (!reviewToEdit) {
       const err = new Error("Review couldn't be found");
       err.status = 404;
+      return next(err);
+    }
+    if (userId !== reviewToEdit.userId) {
+      const err = new Error("Forbidden");
+      err.status = 403;
       return next(err);
     }
     reviewToEdit.update({ review, stars });
