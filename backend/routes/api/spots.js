@@ -342,8 +342,11 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
 
   const limit = size || 20;
   let offset = limit * ((page || 1) - 1);
+  let pageToDisplay = page;
 
-  // if (offset === 0) offset = 1;
+  // if (pageToDisplay === 0 || pageToDisplay === 1) {
+  //   pageToDisplay = 1;
+  // }
 
   const spots = await Spot.findAll({
     attributes: {
@@ -359,7 +362,7 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
     subQuery: false,
   });
 
-  res.json({ Spots: spots, page: offset, size: Number(limit) });
+  res.json({ Spots: spots, page: Number(pageToDisplay), size: Number(limit) });
 });
 
 //POST /spots Create a Spot
