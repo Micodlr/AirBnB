@@ -449,7 +449,7 @@ router.get("/:spotId", async (req, res, next) => {
       { model: Image, attributes: ["id", "imageableId", "url"] },
       { model: User, as: "Owner", attributes: ["id", "firstName", "lastName"] },
     ],
-    group: ["Owner.Id", "Spot.id", "Images.id"],
+    group: ["Owner.id", "Spot.id", "Images.id"],
   });
 
   res.json(spot);
