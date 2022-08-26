@@ -342,7 +342,7 @@ router.get("/", [validateQueryFilters], async (req, res, next) => {
 
   const limit = size || 20;
   let offset = limit * ((page || 1) - 1);
-  let pageToDisplay = page;
+  let pageToDisplay = page || 1;
 
   // if (pageToDisplay === 0 || pageToDisplay === 1) {
   //   pageToDisplay = 1;

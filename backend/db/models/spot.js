@@ -53,6 +53,11 @@ module.exports = (sequelize, DataTypes) => {
             exclude: ["previewImage"],
           },
         },
+        create: {
+          attributes: {
+            exclude: ["previewImage"],
+          },
+        },
       },
     }
   );
