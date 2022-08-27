@@ -43,7 +43,7 @@ router.get("/user/reviews", restoreUser, async (req, res, next) => {
         attributes: { exclude: ["createdAt", "updatedAt", "previewImage"] },
       },
       { model: Image },
-      { model: User },
+      { model: User, attributes: ["id", "firstName", "lastName"] },
     ],
   });
   res.json({ Reviews: reviews });
