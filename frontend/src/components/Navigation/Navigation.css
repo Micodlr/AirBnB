@@ -12,12 +12,22 @@ li {
   gap: 5px;
 }
 
-i {
+/* i {
   color: black;
+} */
+#airbnb-img {
+  margin-left: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 75px;
 }
+
 #navbar {
   display: flex;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
 }
+
 #signup {
   text-decoration: none;
   font-weight: bold;
