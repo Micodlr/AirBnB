@@ -6,6 +6,7 @@ ul {
   width: 100%;
   padding: 0px;
   margin-top: 0%;
+  align-items: flex-end;
 }
 li {
   display: flex;
@@ -23,6 +24,7 @@ li {
   display: flex;
   border-bottom: 1px solid lightgray;
   margin-bottom: 10px;
+  padding-bottom: 0px;
 }
 
 #signup {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
-import { mySpots } from "../../store/spots";
+import { mySpots, SpotDelete } from "../../store/spots";
 import { SpotEdit } from "../../store/spots";
 
 export default function EditSpot() {
@@ -43,6 +43,12 @@ export default function EditSpot() {
     await dispatch(SpotEdit(payload));
 
     history.push(`/spots/${spotId}`);
+  };
+  const onClick = async (e) => {
+    e.preventDefault();
+    console.log(spotId);
+    await dispatch(SpotDelete(spotId));
+    history.push(`/user/spots`);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -119,6 +125,7 @@ export default function EditSpot() {
         />
       </label>
       <input type="submit" />
+      <button onClick={onClick}>delete</button>
     </form>
   );
 }

@@ -4,6 +4,7 @@ const GET = "spots/get";
 const ADD = "spots/add";
 const MYSPOTS = "/user/spots";
 const EDIT = "/spots/edit";
+const DELETE = "/spots/delete";
 
 const getSpots = (spots) => ({
   type: GET,
@@ -21,6 +22,11 @@ const getMySpots = (spots) => ({
 
 const editSpot = (spot) => ({
   type: EDIT,
+  spot,
+});
+
+const deleteSpot = (spot) => ({
+  type: DELETE,
   spot,
 });
 
@@ -54,7 +60,7 @@ export const mySpots = () => async (dispatch) => {
   if (response.ok) {
     const obj = {};
     Spots.forEach((spot) => (obj[spot.id] = spot));
-    // console.log(obj, "=----==-=-=-==");
+
     dispatch(getMySpots(obj));
   }
 };
@@ -72,6 +78,16 @@ export const SpotEdit = (spot) => async (dispatch) => {
   }
 };
 
+export const SpotDelete = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    dispatch(deleteSpot(id));
+  }
+};
+
 const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
@@ -85,10 +101,12 @@ const spotsReducer = (state = initialState, action) => {
       return newState;
     case MYSPOTS:
       newState = { ...action.spots };
-
       return newState;
     case EDIT:
       newState = { ...state, [action.spot.id]: action.spot };
+      return newState;
+    case DELETE:
+      delete newState[action.spot.id];
       return newState;
     default:
       return state;
