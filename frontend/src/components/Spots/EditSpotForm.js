@@ -14,7 +14,7 @@ export default function EditSpot() {
   }, [dispatch]);
   console.log(spotId);
   const spotToEdit = useSelector((state) => state.spots[spotId]);
-  console.log(spotToEdit);
+
   const [address, setAddress] = useState(spotToEdit.address);
   const [city, setCity] = useState(spotToEdit.city);
   const [state, setState] = useState(spotToEdit.state);
@@ -46,7 +46,7 @@ export default function EditSpot() {
   };
   const onClick = async (e) => {
     e.preventDefault();
-    console.log(spotId);
+
     await dispatch(SpotDelete(spotId));
     history.push(`/user/spots`);
   };

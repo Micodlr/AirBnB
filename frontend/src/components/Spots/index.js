@@ -22,7 +22,8 @@ export default function SpotsPage() {
           <img src={spot.previewImage} alt={spot.name}></img>
           <div>
             <i className="fa-solid fa-star"> </i>
-            {spot.avgRating}
+            {Number(spot.avgRating).toFixed(1)}
+            {/* {console.log(Number(spot.avgRating).toFixed(1))} */}
           </div>
           <div>
             <Link to={`/spots/${spot.id}`}>{spot.name}</Link>

@@ -9,6 +9,7 @@ export default function MySpots() {
   const history = useHistory();
   useEffect(() => {
     dispatch(mySpots());
+
     // const getUser = async () => await dispatch(restoreUser());
     // console.log(getUser());
   }, [dispatch]);

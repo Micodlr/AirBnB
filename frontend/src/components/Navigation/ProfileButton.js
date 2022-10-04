@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
+const linkStyle = {
+  textDecoration: "none",
+  color: "red",
+};
 function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -31,18 +36,33 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <NavLink to="/user/spots">mySpots</NavLink>
+      <NavLink
+        to="/user/reviews"
+        style={linkStyle}
+        activeClassName="active-navlink"
+      >
+        myReviews
+      </NavLink>
+      <NavLink
+        to="/user/spots"
+        style={linkStyle}
+        activeClassName="active-navlink"
+      >
+        mySpots
+      </NavLink>
       <button onClick={openMenu}>
         <i className="fa-solid fa-user"></i>
       </button>
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
+        <div>
+          <ul className="profile-dropdown">
+            <li>{user.username}</li>
+            <li>{user.email}</li>
+            <li>
+              <button onClick={logout}>Log Out</button>
+            </li>
+          </ul>
+        </div>
       )}
     </>
   );

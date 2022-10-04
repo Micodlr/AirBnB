@@ -92,8 +92,13 @@ export const signup = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setSession(data));
-  return response;
+  if (response.ok) {
+    dispatch(setSession(data));
+    return response;
+  } else {
+    const err = new Error();
+    err.message = data.message;
+  }
 };
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
@@ -105,8 +110,18 @@ export const login = (user) => async (dispatch) => {
     }),
   });
   const data = await response.json();
-  dispatch(setSession(data));
-  return response;
+  console.log(response.statusCode);
+  if (response.ok) {
+    console.log("hello");
+    dispatch(setSession(data));
+    return data;
+  } else {
+    console.log("hit error");
+    const err = new Error();
+    err.status = data.statusCode;
+    err.message = data.message;
+    throw err;
+  }
 };
 
 export const logout = () => async (dispatch) => {
@@ -117,7 +132,7 @@ export const logout = () => async (dispatch) => {
   return response;
 };
 
-const initialState = { user: null };
+const initialState = { user: {} };
 
 const sessionReducer = (state = initialState, action) => {
   let newState = { ...state };
@@ -127,7 +142,7 @@ const sessionReducer = (state = initialState, action) => {
       return newState;
 
     case REMOVE:
-      newState.user = null;
+      newState.user = {};
       return newState;
 
     default:
