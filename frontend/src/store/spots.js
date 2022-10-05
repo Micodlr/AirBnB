@@ -50,6 +50,10 @@ export const CreateNewSpot = (spot) => async (dispatch) => {
   const newSpot = await response.json();
   if (response.ok) {
     dispatch(addSpot(newSpot));
+  } else {
+    const err = new Error();
+    console.log("hit error");
+    err.message = newSpot.message;
   }
 };
 

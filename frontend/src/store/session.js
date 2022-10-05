@@ -91,17 +91,17 @@ export const signup = (user) => async (dispatch) => {
       password,
     }),
   });
-  const data = await response.json();
   if (response.ok) {
+    const data = await response.json();
     dispatch(setSession(data));
-    return response;
+    return data;
   } else {
-    const err = new Error();
-    err.message = data.message;
+    throw response;
   }
 };
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
+  console.log("test");
   const response = await csrfFetch("/api/login", {
     method: "POST",
     body: JSON.stringify({
@@ -109,18 +109,14 @@ export const login = (user) => async (dispatch) => {
       password,
     }),
   });
-  const data = await response.json();
-  console.log(response.statusCode);
+
   if (response.ok) {
-    console.log("hello");
+    const data = await response.json();
+
     dispatch(setSession(data));
     return data;
   } else {
-    console.log("hit error");
-    const err = new Error();
-    err.status = data.statusCode;
-    err.message = data.message;
-    throw err;
+    throw response;
   }
 };
 

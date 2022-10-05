@@ -31,7 +31,9 @@ function SignupForm() {
         })
       ).catch(async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        const err = Object.values(data.errors);
+        // console.log(data);
+        if (data && err) setErrors(err);
       });
     }
     return setErrors([

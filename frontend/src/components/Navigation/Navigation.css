@@ -9,6 +9,7 @@ ul {
   margin-top: 0%;
   align-items: flex-end;
   flex-direction: column;
+  gap: 2px;
 }
 li {
   display: flex;

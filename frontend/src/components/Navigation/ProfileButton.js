@@ -50,11 +50,13 @@ function ProfileButton({ user }) {
       >
         mySpots
       </NavLink>
+
       <button onClick={openMenu}>
         <i className="fa-solid fa-user"></i>
       </button>
+
       {showMenu && (
-        <div>
+        <div className="dropdown-content">
           <ul className="profile-dropdown">
             <li>{user.username}</li>
             <li>{user.email}</li>
