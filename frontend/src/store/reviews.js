@@ -48,9 +48,11 @@ export const CreateNewReview = (review) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(review),
   });
-  const newReview = await response.json();
   if (response.ok) {
+    const newReview = await response.json();
     dispatch(addReview(newReview));
+  } else {
+    throw response;
   }
 };
 
@@ -76,6 +78,8 @@ export const reviewEdit = (review) => async (dispatch) => {
   const editedreview = await response.json();
   if (response.ok) {
     dispatch(editReview(editedreview));
+  } else {
+    throw response;
   }
 };
 

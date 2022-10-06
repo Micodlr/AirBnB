@@ -47,13 +47,11 @@ export const CreateNewSpot = (spot) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot),
   });
-  const newSpot = await response.json();
   if (response.ok) {
+    const newSpot = await response.json();
     dispatch(addSpot(newSpot));
   } else {
-    const err = new Error();
-    console.log("hit error");
-    err.message = newSpot.message;
+    throw response;
   }
 };
 
@@ -76,9 +74,11 @@ export const SpotEdit = (spot) => async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(spot),
   });
-  const editedSpot = await response.json();
   if (response.ok) {
+    const editedSpot = await response.json();
     dispatch(editSpot(editedSpot));
+  } else {
+    throw response;
   }
 };
 

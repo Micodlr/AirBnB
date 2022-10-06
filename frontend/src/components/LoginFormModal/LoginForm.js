@@ -14,9 +14,8 @@ function LoginForm() {
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
-        console.log(res);
         const data = await res.json();
-        console.log(typeof data.message);
+
         const err = [data.message];
 
         if (data && data.message) setErrors(err);

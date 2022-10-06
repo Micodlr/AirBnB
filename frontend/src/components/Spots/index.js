@@ -21,7 +21,7 @@ export default function SpotsPage() {
           {/* <SpotDetails spot={spot} /> */}
           <img src={spot.previewImage} alt={spot.name}></img>
           <div>
-            <i className="fa-solid fa-star"> </i>
+            <i className="fa-regular fa-star"></i>
             {Number(spot.avgRating).toFixed(1)}
             {/* {console.log(Number(spot.avgRating).toFixed(1))} */}
           </div>

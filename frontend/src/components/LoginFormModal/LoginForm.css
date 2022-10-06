@@ -6,6 +6,7 @@ button {
 }
 h3 {
   font-weight: 500;
+  color: rgb(255, 90, 95);
 }
 .loginForm {
   display: flex;

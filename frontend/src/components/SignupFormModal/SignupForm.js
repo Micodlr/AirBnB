@@ -30,24 +30,27 @@ function SignupForm() {
           lastName,
         })
       ).catch(async (res) => {
+        // const data = await res.json();
+        // const err = Object.values(data.errors);
+        // // console.log(data);
+        // if (data && err) setErrors(err);
         const data = await res.json();
-        const err = Object.values(data.errors);
-        // console.log(data);
-        if (data && err) setErrors(err);
+        if (data && data.errors) setErrors(data.errors);
       });
     }
-    return setErrors([
+
+    setErrors([
       "Confirm Password field must be the same as the Password field",
     ]);
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
+      {/* <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
         ))}
-      </ul>
+      </ul> */}
       <label>
         Firstname
         <input
@@ -56,6 +59,7 @@ function SignupForm() {
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
+        <p>{errors.firstName}</p>
       </label>
       <label>
         Lastname
@@ -65,6 +69,7 @@ function SignupForm() {
           onChange={(e) => setLastName(e.target.value)}
           required
         />
+        <p>{errors.lastName}</p>
       </label>
       <label>
         Email
@@ -74,6 +79,7 @@ function SignupForm() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <p>{errors.email}</p>
       </label>
       <label>
         Username
@@ -83,6 +89,7 @@ function SignupForm() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+        <p>{errors.username}</p>
       </label>
       <label>
         Password
@@ -92,6 +99,7 @@ function SignupForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <p>{errors.password}</p>
       </label>
       <label>
         Confirm Password

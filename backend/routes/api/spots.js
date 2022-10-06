@@ -179,7 +179,7 @@ router.post(
       err.status = 404;
       return next(err);
     }
-    const reviewCheck = await Review.findOne({ where: { userId } });
+    const reviewCheck = await Review.findOne({ where: { userId, spotId } });
     if (reviewCheck) {
       const err = new Error("User already has a review for this spot");
       err.status = 403;

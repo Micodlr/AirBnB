@@ -24,6 +24,7 @@ export default function EditSpot() {
   const [name, setName] = useState(spotToEdit.name);
   const [description, setDescription] = useState(spotToEdit.description);
   const [price, setPrice] = useState(spotToEdit.price);
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,10 +40,15 @@ export default function EditSpot() {
       description,
       price,
     };
+    try {
+      await dispatch(SpotEdit(payload));
+      history.push(`/user/spots/${spotId}`);
+    } catch (res) {
+      setErrors([]);
+      const data = await res.json();
 
-    await dispatch(SpotEdit(payload));
-
-    history.push(`/spots/${spotId}`);
+      if (data && data.message) setErrors(data.errors);
+    }
   };
   const onClick = async (e) => {
     e.preventDefault();
@@ -59,7 +65,9 @@ export default function EditSpot() {
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          required
         />
+        <p>{errors.address}</p>
       </label>
       <label>
         City
@@ -67,7 +75,9 @@ export default function EditSpot() {
           type="text"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          required
         />
+        <p>{errors.city}</p>
       </label>
       <label>
         State
@@ -75,7 +85,9 @@ export default function EditSpot() {
           type="text"
           value={state}
           onChange={(e) => setState(e.target.value)}
+          required
         />
+        <p>{errors.state}</p>
       </label>
       <label>
         Country
@@ -83,7 +95,9 @@ export default function EditSpot() {
           type="text"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
+          required
         />
+        <p>{errors.country}</p>
       </label>
       <label>
         lat
@@ -91,7 +105,9 @@ export default function EditSpot() {
           type="text"
           value={lat}
           onChange={(e) => setLat(e.target.value)}
+          required
         />
+        <p>{errors.lat}</p>
       </label>
       <label>
         lng
@@ -99,7 +115,9 @@ export default function EditSpot() {
           type="text"
           value={lng}
           onChange={(e) => setLng(e.target.value)}
+          required
         />
+        <p>{errors.lng}</p>
       </label>
       <label>
         Name
@@ -107,14 +125,18 @@ export default function EditSpot() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
         />
+        <p>{errors.name}</p>
       </label>
       <label>
         Description
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          required
         />
+        <p>{errors.description}</p>
       </label>
       <label>
         Price
@@ -122,7 +144,9 @@ export default function EditSpot() {
           type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+          required
         />
+        <p>{errors.price}</p>
       </label>
       <input type="submit" />
       <button onClick={onClick}>delete</button>

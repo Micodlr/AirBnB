@@ -21,7 +21,7 @@ export default function SpotDetails() {
         <div id="name">{spot?.name}</div>
         <img src={spot?.previewImage} alt={spot?.name}></img>
         <div>{spot?.address}</div>
-        <div>{spot?.price}/night</div>
+        <div>${spot?.price}/night</div>
       </div>
       <div id="reviews-container">
         reviews

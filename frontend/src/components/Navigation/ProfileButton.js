@@ -5,7 +5,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const linkStyle = {
   textDecoration: "none",
-  color: "red",
+  color: "rgb(255, 90, 95)",
 };
 function ProfileButton({ user }) {
   const history = useHistory();

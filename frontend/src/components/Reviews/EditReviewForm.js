@@ -37,27 +37,35 @@ export default function EditSpotForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Edit Review</h2>
-      <label>
-        Review
-        <input
-          type="text"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
-      </label>
-      <label>
-        Stars
-        <input
-          type="number"
-          value={stars}
-          onChange={(e) => setStars(e.target.value)}
-        />
-      </label>
+    <div id="container">
+      <div id="form-container">
+        <form onSubmit={handleSubmit}>
+          <h2>Edit Review</h2>
+          <label>
+            Review
+            <textarea
+              type="text"
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Stars
+            <input
+              type="number"
+              value={stars}
+              onChange={(e) => setStars(e.target.value)}
+              required
+              max="5"
+              min="1"
+            />
+          </label>
 
-      <input type="submit" />
-      <button onClick={onClick}>delete</button>
-    </form>
+          <input type="submit" />
+          <button onClick={onClick}>delete</button>
+        </form>
+      </div>
+    </div>
   );
 }

@@ -23,8 +23,12 @@ export default function MySpots() {
 
   return (
     <>
-      <h1>My Spots</h1>
-      <button onClick={routeChange}>Add New Spot</button>
+      <div id="mySpots-header">
+        <h1>My Spots</h1>
+        <button id="add-new-spot" onClick={routeChange}>
+          Add New Spot
+        </button>
+      </div>
       <div id="mySpots">
         {spots.map((spot) => (
           <div id="spot" key={spot.id}>

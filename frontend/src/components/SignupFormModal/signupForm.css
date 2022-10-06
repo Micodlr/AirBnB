@@ -1,8 +1,8 @@
 button {
-  background-color: rgb(227, 28, 95);
+  background-color: rgb(255, 90, 95);
   color: white;
   border-radius: 10%;
-  border-color: rgb(227, 28, 95);
+  border-color: rgb(255, 90, 95);
 }
 form {
   display: flex;

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { CreateNewReview } from "../../store/reviews";
 export default function ReviewForm() {
@@ -9,37 +9,61 @@ export default function ReviewForm() {
 
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors([]);
     let payload = {
       spotId,
       review,
       stars,
     };
 
-    await dispatch(CreateNewReview(payload));
+    try {
+      await dispatch(CreateNewReview(payload));
+      history.push("/user/reviews");
+    } catch (res) {
+      const data = await res.json();
 
-    history.push(`/user/reviews`);
+      const err = [data.message];
+      if (data && data.message) setErrors(err);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Review</h2>
-      <label>
-        Review
-        <textarea value={review} onChange={(e) => setReview(e.target.value)} />
-      </label>
-      <label>
-        Stars
-        <input
-          type="number"
-          value={stars}
-          onChange={(e) => setStars(e.target.value)}
-        />
-      </label>
+    <div id="container">
+      <div id="form-container">
+        <form onSubmit={handleSubmit}>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <h2>Create Review</h2>
+          <label>
+            Review
+            <textarea
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Stars
+            <input
+              type="number"
+              value={stars}
+              onChange={(e) => setStars(e.target.value)}
+              required
+              max="5"
+              min="1"
+            />
+          </label>
 
-      <input type="submit" />
-    </form>
+          <input type="submit" />
+        </form>
+      </div>
+    </div>
   );
 }
