@@ -141,6 +141,7 @@ export default function CreateSpotForm() {
               required
               placeholder="name"
             />
+            <p>{errors.name}</p>
           </label>
           <label>
             Description
