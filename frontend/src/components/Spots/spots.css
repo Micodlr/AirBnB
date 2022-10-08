@@ -17,6 +17,16 @@ div {
     Helvetica Neue, sans-serif;
 }
 
+#spot {
+  border: solid rgba(239, 234, 234, 0.892);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+}
+#spot:hover {
+  box-shadow: 3px 6px rgba(235, 233, 233, 0.85);
+}
+
 #mySpots {
   width: 100%;
   display: flex;
@@ -29,11 +39,23 @@ div {
 #mySpots-header {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 h1 {
   color: rgb(255, 90, 95);
   margin-top: 0px;
+  margin-bottom: 10px;
+}
+div#my-spots {
+  display: flex;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+div#add-new-spot {
+  display: flex;
 }
 button#add-new-spot {
   background-color: rgb(255, 90, 95);
@@ -43,52 +65,144 @@ button#add-new-spot {
   width: 80px;
   height: 40px;
 }
+button#back {
+  border-radius: 10px;
+  width: 110px;
+  height: 55px;
+}
+button:hover {
+  color: whitesmoke;
+  font-weight: bold;
+}
 a {
-  color: black;
+  color: rgb(255, 90, 95);
+  font-size: large;
   text-decoration: none;
 }
 a:hover {
   color: rgb(255, 90, 95);
-  font-weight: bold;
+  font-weight: bolder;
 }
 i.fa-regular.fa-star {
   color: goldenrod;
 }
 
+#my-reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#myReviews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  justify-content: space-between;
+}
+
+#review {
+  /* border: solid lightgray;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: lightgray; */
+  color: rgb(255, 90, 95);
+
+  border: solid rgba(239, 234, 234, 0.892);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+}
+#review:hover {
+  box-shadow: 3px 6px rgba(235, 233, 233, 0.85);
+}
+#updated-at {
+  font-size: 12px;
+  color: black;
+  border-bottom: solid lightgray;
+  padding-bottom: 3px;
+}
+#spot-address {
+  color: black;
+}
 #form-container {
   border: solid;
   border-color: lightgray;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+  border-radius: 15px;
+  color: rgb(255, 90, 95);
 
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 0px;
+}
+#create-new-spot-container {
+  color: rgb(255, 90, 95);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
 }
 
-form {
+form.spots-form {
   display: flex;
   align-items: flex-start;
   color: rgb(255, 90, 95);
+  border: solid lightgray;
+  border-radius: 15px;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+  padding: 30px;
+}
+#edit-spot-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form.edit-spot-form {
+  display: flex;
+  align-items: flex-start;
+  color: rgb(255, 90, 95);
+  border: solid lightgray;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+  border-radius: 15px;
+  padding: 30px;
+  align-items: center;
+}
+#delete-btn {
+  width: 325px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: red;
 }
 input {
-  width: 100%;
-  height: 50%;
+  width: 325px;
+  height: 30px;
   border: 2px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
   display: flex;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
 }
 input:focus {
   outline: none;
   border-color: darkgray;
 }
+input[type="number"] {
+  width: 325px;
+}
+
 textarea {
-  width: 250px;
-  height: 75px;
+  width: 325px;
+  height: 275px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 5px;
   display: flex;
   overflow: auto;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
 }
 textarea:focus {
   outline: none;
@@ -102,14 +216,98 @@ input[type="submit"] {
   cursor: pointer;
   border-radius: 5px;
   border-radius: 5px;
-}
-
-#container {
   display: flex;
   justify-content: center;
+  width: 325px;
+}
+
+#review-form-container {
+  display: flex;
+  justify-content: flex-start;
+  padding: 25px;
+}
+#review-date {
+  font-size: small;
+  border-bottom: solid lightgray;
+  margin-bottom: 7px;
+  padding: 2px;
 }
 
 p {
   color: black;
   font-size: smaller;
+}
+
+#spot-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+}
+#spot-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(255, 90, 95);
+  border: solid;
+  border-color: lightgray;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+  border-radius: 15px;
+  padding-top: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+}
+
+#spot-details-img {
+  width: 350px;
+  height: 350px;
+  padding-bottom: 5px;
+}
+
+#name {
+  color: rgb(255, 90, 95);
+}
+#description {
+  padding: 5px;
+  margin-top: 20px;
+
+  border: 2px solid #ccc;
+  border-color: lightgray;
+  border-radius: 10px;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+  color: rgb(255, 90, 95);
+  display: flex;
+}
+
+i.fa-regular.fa-star {
+  color: goldenrod;
+}
+
+#reviews-container {
+  display: flex;
+  /* border: solid;
+  border-color: lightgray; */
+  border-radius: 10px;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#spot-reviews-container {
+  display: flex;
+
+  flex-direction: column;
+  color: rgb(255, 90, 95);
+  gap: 15px;
+}
+#review-container {
+  display: flex;
+  border: solid;
+  border-color: lightgray;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
+
+  flex-direction: column-reverse;
 }

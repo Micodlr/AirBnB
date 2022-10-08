@@ -41,3 +41,10 @@ li {
 .active-navlink {
   font-weight: bold;
 }
+
+.dropdown-content {
+  display: block;
+  flex-direction: column;
+}
+.test {
+}

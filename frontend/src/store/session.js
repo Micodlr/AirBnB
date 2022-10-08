@@ -95,9 +95,10 @@ export const signup = (user) => async (dispatch) => {
     const data = await response.json();
     dispatch(setSession(data));
     return data;
-  } else {
-    throw response;
   }
+  // } else {
+  //   throw response;
+  // }
 };
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;

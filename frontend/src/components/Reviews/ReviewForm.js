@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import { CreateNewReview } from "../../store/reviews";
-export default function ReviewForm() {
-  const { spotId } = useParams();
+import { useHistory } from "react-router-dom";
+import { CreateNewReview, getAllreviews } from "../../store/reviews";
+export default function ReviewForm({ spotId }) {
+  //   const { spotId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -22,7 +22,9 @@ export default function ReviewForm() {
 
     try {
       await dispatch(CreateNewReview(payload));
-      history.push("/user/reviews");
+      //   history.push("/user/reviews");
+      dispatch(getAllreviews(spotId));
+      history.push(`/spots/${spotId}`);
     } catch (res) {
       const data = await res.json();
 
@@ -32,15 +34,17 @@ export default function ReviewForm() {
   };
 
   return (
-    <div id="container">
+    <div id="review-form-container">
       <div id="form-container">
         <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
           <h2>Create Review</h2>
+          {errors && (
+            <ul>
+              {errors.map((error, idx) => (
+                <li key={idx}>{error}</li>
+              ))}
+            </ul>
+          )}
           <label>
             Review
             <textarea

@@ -99,7 +99,7 @@ const reviewsReducer = (state = initialState, action) => {
   let newState = { ...state };
   switch (action.type) {
     case GET:
-      newState = { ...state, ...action.reviews };
+      newState = { ...action.reviews };
       return newState;
     case ADD:
       newState = { ...state, [action.newReview.id]: action.newReview };

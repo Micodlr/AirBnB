@@ -13,14 +13,14 @@ function SignupForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   //   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      setErrors([]);
+      setErrors({});
       return dispatch(
         sessionActions.signup({
           email,
@@ -35,22 +35,20 @@ function SignupForm() {
         // // console.log(data);
         // if (data && err) setErrors(err);
         const data = await res.json();
+        console.log(data);
+        console.log(data.errors);
         if (data && data.errors) setErrors(data.errors);
       });
     }
-
-    setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
+    console.log(errors);
+    return setErrors({
+      confirmPW:
+        "Confirm Password field must be the same as the Password field",
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul> */}
       <label>
         Firstname
         <input
@@ -109,6 +107,7 @@ function SignupForm() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
+        <p>{errors.confirmPW}</p>
       </label>
       <button type="submit">Sign Up</button>
     </form>

@@ -12,7 +12,7 @@ export default function EditSpot() {
   useEffect(() => {
     dispatch(mySpots());
   }, [dispatch]);
-  console.log(spotId);
+
   const spotToEdit = useSelector((state) => state.spots[spotId]);
 
   const [address, setAddress] = useState(spotToEdit.address);
@@ -57,99 +57,103 @@ export default function EditSpot() {
     history.push(`/user/spots`);
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Edit Spot</h2>
-      <label>
-        Address
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-        />
-        <p>{errors.address}</p>
-      </label>
-      <label>
-        City
-        <input
-          type="text"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          required
-        />
-        <p>{errors.city}</p>
-      </label>
-      <label>
-        State
-        <input
-          type="text"
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-          required
-        />
-        <p>{errors.state}</p>
-      </label>
-      <label>
-        Country
-        <input
-          type="text"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-          required
-        />
-        <p>{errors.country}</p>
-      </label>
-      <label>
-        lat
-        <input
-          type="text"
-          value={lat}
-          onChange={(e) => setLat(e.target.value)}
-          required
-        />
-        <p>{errors.lat}</p>
-      </label>
-      <label>
-        lng
-        <input
-          type="text"
-          value={lng}
-          onChange={(e) => setLng(e.target.value)}
-          required
-        />
-        <p>{errors.lng}</p>
-      </label>
-      <label>
-        Name
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <p>{errors.name}</p>
-      </label>
-      <label>
-        Description
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <p>{errors.description}</p>
-      </label>
-      <label>
-        Price
-        <input
-          type="number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
-        <p>{errors.price}</p>
-      </label>
-      <input type="submit" />
-      <button onClick={onClick}>delete</button>
-    </form>
+    <div id="edit-spot-container">
+      <form className="edit-spot-form" onSubmit={handleSubmit}>
+        <h2>Edit Spot</h2>
+        <label>
+          Address
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+          <p>{errors.address}</p>
+        </label>
+        <label>
+          City
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+          <p>{errors.city}</p>
+        </label>
+        <label>
+          State
+          <input
+            type="text"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            required
+          />
+          <p>{errors.state}</p>
+        </label>
+        <label>
+          Country
+          <input
+            type="text"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+            required
+          />
+          <p>{errors.country}</p>
+        </label>
+        <label>
+          lat
+          <input
+            type="text"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+            required
+          />
+          <p>{errors.lat}</p>
+        </label>
+        <label>
+          lng
+          <input
+            type="text"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+            required
+          />
+          <p>{errors.lng}</p>
+        </label>
+        <label>
+          Name
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <p>{errors.name}</p>
+        </label>
+        <label>
+          Description
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <p>{errors.description}</p>
+        </label>
+        <label>
+          Price
+          <input
+            type="number"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+          <p>{errors.price}</p>
+        </label>
+        <input type="submit" />
+        <button id="delete-btn" onClick={onClick}>
+          Delete
+        </button>
+      </form>
+    </div>
   );
 }

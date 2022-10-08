@@ -24,24 +24,29 @@ export default function MySpots() {
   return (
     <>
       <div id="mySpots-header">
-        <h1>My Spots</h1>
-        <button id="add-new-spot" onClick={routeChange}>
-          Add New Spot
-        </button>
+        <div id="my-spots">
+          <h1>My Spots</h1>
+        </div>
+        <div id="add-new-spot">
+          <button id="add-new-spot" onClick={routeChange}>
+            Add New Spot
+          </button>
+        </div>
       </div>
       <div id="mySpots">
         {spots.map((spot) => (
           <div id="spot" key={spot.id}>
             <img src={spot.previewImage} alt="spot.name"></img>
-            <div>
-              <i className="fa-solid fa-star"> </i>
+            <div id="rating">
+              <i className="fa-regular fa-star"></i>
               {spot.avgRating}
             </div>
-            <div id="edit-delete-container">
-              <Link to={`/user/edit/${spot.id}`}>edit</Link>
-              <button>delete</button>
-            </div>
             <div>
+              <div id="edit-delete-container">
+                <Link to={`/user/edit/${spot.id}`}>
+                  <button>Edit</button>
+                </Link>
+              </div>
               <Link to={`/spots/${spot.id}`}>{spot.name}</Link>{" "}
             </div>
             <div>{spot.address}</div>

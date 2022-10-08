@@ -62,8 +62,8 @@ export default function CreateSpotForm() {
 
   return (
     <div id="container">
-      <div id="form-container">
-        <form onSubmit={handleSubmit}>
+      <div id="create-new-spot-container">
+        <form className="spots-form" onSubmit={handleSubmit}>
           <h2>Create a New Spot</h2>
 
           <label>
@@ -138,6 +138,7 @@ export default function CreateSpotForm() {
           <label>
             Description
             <textarea
+              id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required

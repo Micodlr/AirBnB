@@ -29,6 +29,7 @@ export default function SpotsPage() {
             <Link to={`/spots/${spot.id}`}>{spot.name}</Link>
           </div>
           <div>{spot.address}</div>
+          <div>{spot.city + ", " + spot.state}</div>
           <div>${spot.price}/night</div>
         </div>
       ))}
