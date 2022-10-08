@@ -35,12 +35,11 @@ function SignupForm() {
         // // console.log(data);
         // if (data && err) setErrors(err);
         const data = await res.json();
-        console.log(data);
-        console.log(data.errors);
+
         if (data && data.errors) setErrors(data.errors);
       });
     }
-    console.log(errors);
+
     return setErrors({
       confirmPW:
         "Confirm Password field must be the same as the Password field",

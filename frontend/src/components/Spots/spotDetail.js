@@ -15,7 +15,7 @@ export default function SpotDetails() {
     // dispatch(getAllreviews());
   }, [dispatch]);
   const spot = useSelector((state) => state.spots[spotId]);
-  console.log(spot);
+
   return (
     <div>
       <div id="spot-container" key={spot?.id}>

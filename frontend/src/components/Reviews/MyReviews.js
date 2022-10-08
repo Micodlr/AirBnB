@@ -11,7 +11,6 @@ export default function MyReviews() {
   }, [dispatch]);
   const reviewsObj = useSelector((state) => state.reviews);
   const reviews = Object.values(reviewsObj);
-  console.log(reviews);
 
   return (
     <div id="wrapper">
