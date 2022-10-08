@@ -13,6 +13,12 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
+//LOGOUT
+router.delete("/user", (_req, res) => {
+  res.clearCookie("token");
+  return res.json({ message: "success" });
+});
+
 //GET Get all of the Current User's Bookings
 router.get(
   "/user/bookings",

@@ -1,0 +1,13 @@
+button {
+  background-color: rgb(255, 90, 95);
+  color: white;
+  border-radius: 10px;
+  border-color: rgb(255, 90, 95);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 15px;
+}

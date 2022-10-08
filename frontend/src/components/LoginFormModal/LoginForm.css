@@ -1,0 +1,17 @@
+button {
+  background-color: rgb(227, 28, 95);
+  color: white;
+  border-radius: 10%;
+  border-color: rgb(227, 28, 95);
+}
+h3 {
+  font-weight: 500;
+  color: rgb(255, 90, 95);
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding: 15px;
+}
