@@ -279,7 +279,7 @@ p {
   border-color: lightgray;
   border-radius: 10px;
   box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
-  color: rgb(255, 90, 95);
+  /* color: rgb(255, 90, 95); */
   display: flex;
 }
 
@@ -329,4 +329,9 @@ i.fa-regular.fa-star {
 #my-reviews-header {
   display: flex;
   justify-content: center;
+}
+
+.errors {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
 }

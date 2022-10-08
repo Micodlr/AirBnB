@@ -56,8 +56,9 @@ function SignupForm() {
           onChange={(e) => setFirstName(e.target.value)}
           required
           placeholder="Enter your firstname"
+          pattern="^(?!\s*$).+"
         />
-        <p>{errors.firstName}</p>
+        <p className="errors">{errors.firstName}</p>
       </label>
       <label>
         Lastname
@@ -67,8 +68,9 @@ function SignupForm() {
           onChange={(e) => setLastName(e.target.value)}
           required
           placeholder="Enter your lastname"
+          pattern="^(?!\s*$).+"
         />
-        <p>{errors.lastName}</p>
+        <p className="errors">{errors.lastName}</p>
       </label>
       <label>
         Email
@@ -79,7 +81,7 @@ function SignupForm() {
           required
           placeholder="Enter your email"
         />
-        <p>{errors.email}</p>
+        <p className="errors">{errors.email}</p>
       </label>
       <label>
         Username
@@ -90,7 +92,7 @@ function SignupForm() {
           required
           placeholder="Enter your username"
         />
-        <p>{errors.username}</p>
+        <p className="errors">{errors.username}</p>
       </label>
       <label>
         Password
@@ -101,7 +103,7 @@ function SignupForm() {
           required
           placeholder="Enter your password"
         />
-        <p>{errors.password}</p>
+        <p className="errors">{errors.password}</p>
       </label>
       <label>
         Confirm Password
@@ -112,7 +114,7 @@ function SignupForm() {
           required
           placeholder="Please re-enter your password"
         />
-        <p>{errors.confirmPW}</p>
+        <p className="errors">{errors.confirmPW}</p>
       </label>
       <button type="submit">Sign Up</button>
     </form>

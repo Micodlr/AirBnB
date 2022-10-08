@@ -68,7 +68,7 @@ export default function EditSpot() {
             onChange={(e) => setAddress(e.target.value)}
             required
           />
-          <p>{errors.address}</p>
+          <p className="errors">{errors.address}</p>
         </label>
         <label>
           City
@@ -78,7 +78,7 @@ export default function EditSpot() {
             onChange={(e) => setCity(e.target.value)}
             required
           />
-          <p>{errors.city}</p>
+          <p className="errors">{errors.city}</p>
         </label>
         <label>
           State
@@ -88,7 +88,7 @@ export default function EditSpot() {
             onChange={(e) => setState(e.target.value)}
             required
           />
-          <p>{errors.state}</p>
+          <p className="errors">{errors.state}</p>
         </label>
         <label>
           Country
@@ -98,7 +98,7 @@ export default function EditSpot() {
             onChange={(e) => setCountry(e.target.value)}
             required
           />
-          <p>{errors.country}</p>
+          <p className="errors">{errors.country}</p>
         </label>
         <label>
           lat
@@ -108,7 +108,7 @@ export default function EditSpot() {
             onChange={(e) => setLat(e.target.value)}
             required
           />
-          <p>{errors.lat}</p>
+          <p className="errors">{errors.lat}</p>
         </label>
         <label>
           lng
@@ -118,7 +118,7 @@ export default function EditSpot() {
             onChange={(e) => setLng(e.target.value)}
             required
           />
-          <p>{errors.lng}</p>
+          <p className="errors">{errors.lng}</p>
         </label>
         <label>
           Name
@@ -128,7 +128,7 @@ export default function EditSpot() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <p>{errors.name}</p>
+          <p className="errors">{errors.name}</p>
         </label>
         <label>
           Description
@@ -137,7 +137,7 @@ export default function EditSpot() {
             onChange={(e) => setDescription(e.target.value)}
             required
           />
-          <p>{errors.description}</p>
+          <p className="errors">{errors.description}</p>
         </label>
         <label>
           Price
@@ -147,7 +147,7 @@ export default function EditSpot() {
             onChange={(e) => setPrice(e.target.value)}
             required
           />
-          <p>{errors.price}</p>
+          <p className="errors">{errors.price}</p>
         </label>
         <input type="submit" />
         <button id="delete-btn" onClick={onClick}>

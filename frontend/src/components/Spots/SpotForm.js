@@ -75,7 +75,7 @@ export default function CreateSpotForm() {
               required
               placeholder="address"
             />
-            <p>{errors.address}</p>
+            <p className="errors">{errors.address}</p>
           </label>
           <label>
             City
@@ -86,7 +86,7 @@ export default function CreateSpotForm() {
               required
               placeholder="city"
             />
-            <p>{errors.city}</p>
+            <p className="errors">{errors.city}</p>
           </label>
           <label>
             State
@@ -97,7 +97,7 @@ export default function CreateSpotForm() {
               required
               placeholder="state"
             />
-            <p>{errors.state}</p>
+            <p className="errors">{errors.state}</p>
           </label>
           <label>
             Country
@@ -108,7 +108,7 @@ export default function CreateSpotForm() {
               required
               placeholder="country"
             />
-            <p>{errors.country}</p>
+            <p className="errors">{errors.country}</p>
           </label>
           <label>
             lat
@@ -119,7 +119,7 @@ export default function CreateSpotForm() {
               required
               placeholder="latitude"
             />
-            <p>{errors.lat}</p>
+            <p className="errors">{errors.lat}</p>
           </label>
           <label>
             lng
@@ -130,7 +130,7 @@ export default function CreateSpotForm() {
               required
               placeholder="longtitude"
             />
-            <p>{errors.lng}</p>
+            <p className="errors">{errors.lng}</p>
           </label>
           <label>
             Name
@@ -141,7 +141,7 @@ export default function CreateSpotForm() {
               required
               placeholder="name"
             />
-            <p>{errors.name}</p>
+            <p className="errors">{errors.name}</p>
           </label>
           <label>
             Description
@@ -152,7 +152,7 @@ export default function CreateSpotForm() {
               required
               placeholder="description...."
             />
-            <p>{errors.description}</p>
+            <p className="errors">{errors.description}</p>
           </label>
           <label>
             Price
@@ -162,7 +162,7 @@ export default function CreateSpotForm() {
               onChange={(e) => setPrice(e.target.value)}
               required
             />
-            <p>{errors.price}</p>
+            <p className="errors">{errors.price}</p>
           </label>
           <input type="submit" />
         </form>

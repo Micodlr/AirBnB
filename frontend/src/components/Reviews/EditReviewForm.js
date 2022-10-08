@@ -33,7 +33,7 @@ export default function EditSpotForm() {
     e.preventDefault();
 
     await dispatch(reviewDelete(reviewId));
-    history.push(`/user/spots`);
+    history.push(`/user/reviews`);
   };
 
   return (
