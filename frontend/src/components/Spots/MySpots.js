@@ -23,36 +23,38 @@ export default function MySpots() {
 
   return (
     <>
-      <div id="mySpots-header">
-        <div id="my-spots">
-          <h1>My Spots</h1>
-        </div>
-        <div id="add-new-spot">
-          <button id="add-new-spot" onClick={routeChange}>
-            Add New Spot
-          </button>
-        </div>
-      </div>
-      <div id="mySpots">
-        {spots.map((spot) => (
-          <div id="spot" key={spot.id}>
-            <img src={spot.previewImage} alt="spot.name"></img>
-            <div id="rating">
-              <i className="fa-regular fa-star"></i>
-              {spot.avgRating}
-            </div>
-            <div>
-              <div id="edit-delete-container">
-                <Link to={`/user/edit/${spot.id}`}>
-                  <button>Edit</button>
-                </Link>
-              </div>
-              <Link to={`/spots/${spot.id}`}>{spot.name}</Link>{" "}
-            </div>
-            <div>{spot.address}</div>
-            <div>${spot.price}/night</div>
+      <div id="my-spots-container">
+        <div id="mySpots-header">
+          <div id="my-spots">
+            <h1>My Spots</h1>
           </div>
-        ))}
+          <div id="add-new-spot">
+            <button id="add-new-spot" onClick={routeChange}>
+              Add New Spot
+            </button>
+          </div>
+        </div>
+        <div id="mySpots">
+          {spots.map((spot) => (
+            <div id="spot" key={spot.id}>
+              <img src={spot.previewImage} alt="spot.name"></img>
+              <div id="rating">
+                <i className="fa-regular fa-star"></i>
+                {spot.avgRating}
+              </div>
+              <div>
+                <div id="edit-delete-container">
+                  <Link to={`/user/edit/${spot.id}`}>
+                    <button>Edit</button>
+                  </Link>
+                </div>
+                <Link to={`/spots/${spot.id}`}>{spot.name}</Link>{" "}
+              </div>
+              <div>{spot.address}</div>
+              <div>${spot.price}/night</div>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

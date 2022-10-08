@@ -56,6 +56,7 @@ function SignupForm() {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           required
+          placeholder="Enter your firstname"
         />
         <p>{errors.firstName}</p>
       </label>
@@ -66,6 +67,7 @@ function SignupForm() {
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           required
+          placeholder="Enter your lastname"
         />
         <p>{errors.lastName}</p>
       </label>
@@ -76,6 +78,7 @@ function SignupForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          placeholder="Enter your email"
         />
         <p>{errors.email}</p>
       </label>
@@ -86,6 +89,7 @@ function SignupForm() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          placeholder="Enter your username"
         />
         <p>{errors.username}</p>
       </label>
@@ -96,6 +100,7 @@ function SignupForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          placeholder="Enter your password"
         />
         <p>{errors.password}</p>
       </label>
@@ -106,6 +111,7 @@ function SignupForm() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          placeholder="Please re-enter your password"
         />
         <p>{errors.confirmPW}</p>
       </label>

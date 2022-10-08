@@ -60,7 +60,7 @@ div#add-new-spot {
 button#add-new-spot {
   background-color: rgb(255, 90, 95);
   color: white;
-  border-radius: 10%;
+  border-radius: 10px;
   border-color: rgb(255, 90, 95);
   width: 80px;
   height: 40px;
@@ -160,6 +160,7 @@ form.spots-form {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
 }
 form.edit-spot-form {
   display: flex;
@@ -168,8 +169,9 @@ form.edit-spot-form {
   border: solid lightgray;
   box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
   border-radius: 15px;
-  padding: 30px;
+  padding: 35px;
   align-items: center;
+  margin-bottom: 50px;
 }
 #delete-btn {
   width: 325px;
@@ -310,4 +312,21 @@ i.fa-regular.fa-star {
   box-shadow: 3px 6px rgba(245, 245, 245, 0.618);
 
   flex-direction: column-reverse;
+}
+
+::placeholder {
+  color: lightgray;
+}
+
+#my-spots-container {
+  height: 100%;
+  width: 100%;
+}
+
+#wrapper {
+  height: 100%;
+}
+#my-reviews-header {
+  display: flex;
+  justify-content: center;
 }

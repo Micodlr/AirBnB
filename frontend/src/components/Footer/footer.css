@@ -1,0 +1,15 @@
+div#footer-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-top: solid lightgray;
+  margin-top: 20px;
+  width: 100%;
+  background-color: rgb(255, 90, 95);
+  color: white;
+}
+a#footer {
+  color: white;
+  font-size: larger;
+  padding-right: 10px;
+}

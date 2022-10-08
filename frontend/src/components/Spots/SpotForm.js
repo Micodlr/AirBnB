@@ -73,6 +73,7 @@ export default function CreateSpotForm() {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
+              placeholder="address"
             />
             <p>{errors.address}</p>
           </label>
@@ -83,6 +84,7 @@ export default function CreateSpotForm() {
               value={city}
               onChange={(e) => setCity(e.target.value)}
               required
+              placeholder="city"
             />
             <p>{errors.city}</p>
           </label>
@@ -93,6 +95,7 @@ export default function CreateSpotForm() {
               value={state}
               onChange={(e) => setState(e.target.value)}
               required
+              placeholder="state"
             />
             <p>{errors.state}</p>
           </label>
@@ -103,6 +106,7 @@ export default function CreateSpotForm() {
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               required
+              placeholder="country"
             />
             <p>{errors.country}</p>
           </label>
@@ -113,6 +117,7 @@ export default function CreateSpotForm() {
               value={lat}
               onChange={(e) => setLat(e.target.value)}
               required
+              placeholder="latitude"
             />
             <p>{errors.lat}</p>
           </label>
@@ -123,6 +128,7 @@ export default function CreateSpotForm() {
               value={lng}
               onChange={(e) => setLng(e.target.value)}
               required
+              placeholder="longtitude"
             />
             <p>{errors.lng}</p>
           </label>
@@ -133,6 +139,7 @@ export default function CreateSpotForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              placeholder="name"
             />
           </label>
           <label>
@@ -142,6 +149,7 @@ export default function CreateSpotForm() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
+              placeholder="description...."
             />
             <p>{errors.description}</p>
           </label>

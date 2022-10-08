@@ -13,6 +13,8 @@ import EditSpot from "./components/Spots/EditSpotForm";
 import MyReviews from "./components/Reviews/MyReviews";
 import EditSpotForm from "./components/Reviews/EditReviewForm";
 import ReviewForm from "./components/Reviews/ReviewForm";
+import Footer from "./components/Footer/Footer";
+import About from "./components/About/About";
 // import { GetMyReviews } from "./store/reviews";
 // import { getAllSpots } from "./store/spots";
 
@@ -30,13 +32,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/signup">
+          {/* <Route path="/signup">
             <SignupFormPage />
-          </Route>
+          </Route> */}
           <Route exact path="/">
             <SpotsPage />
           </Route>
-
           <Route exact path="/spots/new" component={CreateSpotForm} />
           <Route path="/spots/:spotId" component={SpotDetails} />
           <Route exact path="/reviews/:spotId" component={ReviewForm} />
@@ -44,8 +45,10 @@ function App() {
           <Route path="/user/edit/:spotId" component={EditSpot} />
           <Route path="/user/reviews" component={MyReviews} />
           <Route path="/user/review/edit/:reviewId" component={EditSpotForm} />
+          <Route path="/about" component={About} />
         </Switch>
       )}
+      <Footer />
     </>
   );
 }
