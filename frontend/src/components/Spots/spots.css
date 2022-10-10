@@ -103,7 +103,7 @@ i.fa-regular.fa-star {
   flex-wrap: wrap;
   gap: 15px;
 
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 #review {
