@@ -36,33 +36,33 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <NavLink
-        to="/user/reviews"
-        style={linkStyle}
-        activeClassName="active-navlink"
-      >
-        myReviews
-      </NavLink>
-      <NavLink
-        to="/user/spots"
-        style={linkStyle}
-        activeClassName="active-navlink"
-      >
-        mySpots
-      </NavLink>
+      <div id="navlinks">
+        <NavLink
+          to="/user/reviews"
+          style={linkStyle}
+          activeClassName="active-navlink"
+        >
+          myReviews
+        </NavLink>
+        <NavLink
+          to="/user/spots"
+          style={linkStyle}
+          activeClassName="active-navlink"
+        >
+          mySpots
+        </NavLink>
+      </div>
 
       <button onClick={openMenu}>
-        <i className="fa-solid fa-user"></i>
+        <i className="fa-solid fa-user fa-lg"></i>
       </button>
 
       {showMenu && (
         <div className="dropdown-content">
-          <div className="test">
-            <div className="user-info">{user.username}</div>
-            <div className="user-info">{user.email}</div>
+          <div className="user-info">{user.username}</div>
+          <div className="user-info">{user.email}</div>
 
-            <button onClick={logout}>Log Out</button>
-          </div>
+          <button onClick={logout}>Log Out</button>
         </div>
       )}
     </>

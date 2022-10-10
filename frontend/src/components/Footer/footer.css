@@ -1,15 +1,21 @@
-div#footer-container {
+footer#footer-container {
   display: flex;
+  /* position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0; */
+
   justify-content: flex-end;
   padding: 10px;
   border-top: solid lightgray;
-  margin-top: 20px;
+  margin-top: 50px;
   width: 100%;
+
   background-color: rgb(255, 90, 95);
   color: white;
 }
 a#footer {
   color: white;
   font-size: larger;
-  padding-right: 10px;
+  padding-right: 25px;
 }

@@ -17,14 +17,14 @@
   padding: 15px;
 }
 #image-container {
-  margin-top: 5px;
+  margin-top: 20px;
   margin-left: 10px;
 
   border-radius: 10px;
 }
 #d-choe {
-  width: 650px;
-  height: 750px;
+  width: 700px;
+  height: 100%;
   /* width: 46em;
   height: 48em; */
   box-shadow: 3px 6px rgba(245, 245, 245, 0.618);

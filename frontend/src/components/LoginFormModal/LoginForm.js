@@ -38,7 +38,9 @@ function LoginForm() {
       <h3>Welcome to Airbnb</h3>
       <div>
         {`Not a member yet? `}
-        <button onClick={() => setShowModal(true)}>Sign Up</button>
+        <button id="signup" onClick={() => setShowModal(true)}>
+          Sign Up
+        </button>
         {showModal && (
           <Modal onClose={() => setShowModal(false)}>
             <SignupForm />
@@ -72,9 +74,13 @@ function LoginForm() {
             required
             placeholder="Enter your password"
           />
-          <button onClick={onClick}>Demo User</button>
+          <br></br>
         </label>
+
         <button type="submit">Log In</button>
+        <button className="demo" onClick={onClick}>
+          Demo User
+        </button>
       </form>
     </>
   );

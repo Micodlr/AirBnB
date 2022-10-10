@@ -3,6 +3,30 @@ button {
   color: white;
   border-radius: 10%;
   border-color: rgb(227, 28, 95);
+  width: auto;
+  height: auto;
+  font-size: 15px;
+}
+
+button#signup {
+  width: auto;
+  height: auto;
+  color: white;
+  font-weight: lighter;
+}
+button#signup-btn {
+  width: 55px;
+  height: 45px;
+  color: white;
+  font-weight: lighter;
+  font-size: medium;
+  border-radius: 15px;
+}
+button#login-btn {
+  width: 55px;
+  height: 45px;
+  font-size: medium;
+  border-radius: 15px;
 }
 h3 {
   font-weight: 500;

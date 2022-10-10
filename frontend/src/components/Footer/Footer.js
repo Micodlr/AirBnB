@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div id="footer-container">
+    <footer id="footer-container">
       <Link id="footer" to="/about">
         About
       </Link>
-    </div>
+    </footer>
   );
 }
 
