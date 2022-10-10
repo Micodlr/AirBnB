@@ -11,22 +11,33 @@ button {
 button#signup {
   width: auto;
   height: auto;
+
   color: white;
   font-weight: lighter;
+}
+button#signup:hover {
+  color: whitesmoke;
+  font-weight: bold;
 }
 button#signup-btn {
-  width: 55px;
-  height: 45px;
+  width: auto;
+  height: auto;
   color: white;
   font-weight: lighter;
   font-size: medium;
   border-radius: 15px;
 }
+
 button#login-btn {
-  width: 55px;
-  height: 45px;
+  width: auto;
+  height: auto;
   font-size: medium;
   border-radius: 15px;
+}
+
+button#signup-btn:hover {
+  color: whitesmoke;
+  font-weight: bold;
 }
 h3 {
   font-weight: 500;
