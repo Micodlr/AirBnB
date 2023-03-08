@@ -18,7 +18,18 @@ export default function CreateSpotForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    ad;
+    let payload = {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+    };
+
     try {
       await dispatch(CreateNewSpot(payload));
       history.push("/user/spots");
