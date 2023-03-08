@@ -5,7 +5,7 @@
 
 1.Clone Repository
 
-2.Install Dependenices npm install
+2.Install Dependencies npm install
 
 3.In the backend folder create a .env file based on the env.example
 
