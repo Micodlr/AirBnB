@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Micodlr/AirBnB/issues"
   },
-  "homepage": "https://github.com/Micodlr/AirBnB#readme"
+  "homepage": "https://github.com/Micodlr/AirBnB#readme",
+  "devDependencies": {
+    "webpack-cli": "^5.0.1"
+  }
 }
