@@ -8,7 +8,7 @@ export default function GetSpotReviews({ spotId }) {
   useEffect(() => {
     dispatch(getAllreviews(spotId));
     // getAllSpots();
-  }, [dispatch, spotId]);
+  }, [dispatch]);
   const reviewsObj = useSelector((state) => state.reviews);
   const reviews = Object.values(reviewsObj);
 
