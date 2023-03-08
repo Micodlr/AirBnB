@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Airbnb Clone",
   "main": "index.js",
-  "engines": {
-    "node": "16.17.0",
-    "npm": "8.15.0"
-  },
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
