@@ -38,7 +38,7 @@ router.post(
         url: req.body.url,
       });
       const { id, imageableId, url } = newImage;
-
+      console.log(typeof url, "**********************");
       return res.json({ id, imageableId, url });
     } else {
       const err = new Error(
